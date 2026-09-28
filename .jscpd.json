@@ -1,0 +1,4 @@
+{
+  "gitignore": true,
+  "ignore": ["**/tests/**", "**/.venv/**", "**/dist/**", "**/__pycache__/**", "**/*.egg-info/**"]
+}
