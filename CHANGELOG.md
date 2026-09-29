@@ -4,6 +4,10 @@ All notable changes to this project are documented here. Format: [Keep a Changel
 
 ## [Unreleased]
 
+### Changed
+
+- Default model is now `jev-latest` (was the pinned `jev-1.13.0`), tracking the recommended model. Pass `model=` to `TypeSafeProvider` to pin a version for reproducibility.
+
 ### Added
 
 - **v0.1:** `rerank(query, passages, provider)` and `JevReranker` - score each passage's relevance to the query with one batched Jev `Score` call, sort descending, filter by `min_score`, truncate to `top_n`.

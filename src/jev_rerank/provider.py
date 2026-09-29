@@ -39,7 +39,7 @@ def _post_json(url: str, headers: dict[str, str], body: dict[str, Any], attempts
 class TypeSafeProvider:
     """First-party Jev client (verified against docs.typesafe.ai/api)."""
 
-    def __init__(self, api_key: str, model: str = "jev-1.13.0", base_url: str = "https://api.typesafe.ai/v1") -> None:
+    def __init__(self, api_key: str, model: str = "jev-latest", base_url: str = "https://api.typesafe.ai/v1") -> None:
         self._api_key = api_key
         self._model = model
         self._base_url = base_url

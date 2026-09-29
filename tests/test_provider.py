@@ -32,14 +32,14 @@ def test_evaluate_posts_and_parses(monkeypatch: MonkeyPatch) -> None:
         captured["url"] = request.full_url
         captured["body"] = json.loads(request.data)
         captured["auth"] = request.get_header("Authorization")
-        return _Response({"model": "jev-1.13.0", "answers": {"p0": {"type": "score", "score": 2.0}}})
+        return _Response({"model": "jev-latest", "answers": {"p0": {"type": "score", "score": 2.0}}})
 
     monkeypatch.setattr(urllib.request, "urlopen", fake_urlopen)
     out = TypeSafeProvider("k").evaluate({"query": "x"}, {"p0": {"type": "score"}})
 
     assert out["answers"]["p0"]["score"] == 2.0
     assert captured["url"].endswith("/v1/systemone")
-    assert captured["body"]["model"] == "jev-1.13.0"
+    assert captured["body"]["model"] == "jev-latest"
     assert captured["auth"] == "Bearer k"
 
 
