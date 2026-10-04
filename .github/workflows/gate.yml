@@ -1,26 +1,11 @@
 name: gate
-on:
-  pull_request: {}
-  push:
-    branches: [main]
+on: { pull_request: {}, push: { branches: [main] } }
 concurrency:
   group: gate-${{ github.ref }}
   cancel-in-progress: true
-permissions:
-  contents: read
-# Self-contained: Foundry has the Python mise verbs but no reusable python.yml yet
-# (backport candidate). Mirrors `mise run gate`: lint -> typecheck -> test -> audit.
 jobs:
   gate:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v5
-      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v6
-        with:
-          python-version: '3.12'
-      - run: pip install -e ".[dev]"
-      - run: ruff check .
-      - run: ruff format --check .
-      - run: mypy src tests
-      - run: pytest --cov --cov-fail-under=90
-      - run: pip-audit --skip-editable
+    uses: CMaintz/foundry/.github/workflows/gate.yml@v2   # the public facade - pin this, not the per-stack files
+    with:
+      stack: "python"
+      working_directory: "."
