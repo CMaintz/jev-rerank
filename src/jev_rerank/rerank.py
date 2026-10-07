@@ -77,7 +77,7 @@ class JevReranker:
         return ranked if self._top_n is None else ranked[: self._top_n]
 
 
-def rerank(  # noqa: PLR0913 - public one-shot API mirrors Reranker options
+def rerank(
     query: str,
     passages: list[str],
     provider: Provider,
