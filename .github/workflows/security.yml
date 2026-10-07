@@ -1,22 +1,9 @@
 name: security
-on:
-  pull_request: {}
-  push:
-    branches: [main]
+on: { pull_request: {}, push: { branches: [main] } }
 concurrency:
   group: security-${{ github.ref }}
   cancel-in-progress: true
-permissions:
-  contents: read
-  pull-requests: read
 jobs:
   security:
-    uses: CMaintz/foundry/.github/workflows/security.yml@2112a422a905c329602701d7a0a40fbdb5b91a19 # v2.5.1
-    permissions:
-      contents: read
-      pull-requests: read # gitleaks lists the PR's commits
-    with:
-      # Gate-defining files: changing these alongside source needs the ruleset-change label.
-      ruleset_paths: '^(mise\.toml|pyproject\.toml|\.habit-hooks/|\.jscpd\.json|\.gitleaks\.toml|\.github/workflows/|scripts/)'
-      source_paths: '^src/'
-      test_paths: '^tests/'
+    uses: CMaintz/foundry/.github/workflows/security.yml@v2   # facade: secret scan + ruleset-guard + SAST
+    permissions: { contents: read, pull-requests: read }   # the secret scan lists the PR's commits

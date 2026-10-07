@@ -6,6 +6,8 @@ All notable changes to this project are documented here. Format: [Keep a Changel
 
 ### Changed
 
+- CI moved onto the Foundry v2 Python stack: `mise.toml` from Foundry's python template (pinned ruff/mypy/pytest/pip-audit, habit-hooks smells folded into lint, loop telemetry) and the `gate`/`security`/`ratchet`/`bootstrap` facades at `@v2`, replacing the self-contained gate from before Foundry had a Python stack.
+- Synced to Foundry v2.8.0: structural smells now come from the habit-hooks python sensor (ruff smells plus deptry), ratcheted against the snooze baseline, so `C90` left the hard ruff select. `renovate.json` extends the shared Foundry preset. Dropped the unused `uv.lock` and `[dev]` extra; the mise template installs the pinned tools.
 - Default model is now `jev-latest` (was the pinned `jev-1.13.0`), tracking the recommended model. Pass `model=` to `TypeSafeProvider` to pin a version for reproducibility.
 
 ### Added

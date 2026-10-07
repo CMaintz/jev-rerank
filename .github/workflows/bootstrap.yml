@@ -2,16 +2,11 @@ name: bootstrap
 on:
   workflow_dispatch: {}
   schedule:
-    - cron: '0 6 * * 1' # weekly auto-prune of the snooze baseline
+    - cron: '0 6 * * *'   # daily auto-prune - baseline shrinks on its own, one PR/day max
 jobs:
   bootstrap:
-    uses: CMaintz/foundry/.github/workflows/bootstrap.yml@2112a422a905c329602701d7a0a40fbdb5b91a19 # v2.5.1
-    secrets:
-      app_private_key: ${{ secrets.BOOTSTRAP_APP_PRIVATE_KEY }}
+    uses: CMaintz/foundry/.github/workflows/bootstrap.yml@v2
     with:
-      working_directory: '.'
-      # No habit-hooks-python plugin ships yet, so structural smells come from the
-      # language-independent generic sensor (jscpd + line-count). See .habit-hooks/config.toml.
-      habit_hooks_plugin: 'habit-hooks-generic'
-      app_client_id: ${{ vars.BOOTSTRAP_APP_CLIENT_ID }}
+      working_directory: "."
+      habit_hooks_plugin: "habit-hooks-generic"
     permissions: { contents: write, pull-requests: write }
