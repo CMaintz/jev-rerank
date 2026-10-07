@@ -8,5 +8,5 @@ jobs:
     uses: CMaintz/foundry/.github/workflows/bootstrap.yml@v2
     with:
       working_directory: "."
-      habit_hooks_plugin: "habit-hooks-generic"
+      habit_hooks_plugin: "habit-hooks-python"
     permissions: { contents: write, pull-requests: write }
